@@ -22,20 +22,22 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Instala Node.js 14.x y npm
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
+RUN apt-get install -y npm
 
 # Habilita las extensiones PHP necesarias
 # RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 # RUN docker-php-ext-install gd pdo pdo_sqlite zip xml
 
 # Copia el proyecto Laravel en el directorio /var/www
-COPY . /var/www
+COPY /composer.* /var/www
+COPY /package.* /var/www
 WORKDIR /var/www
 
 # Instala las dependencias de Composer y de Node.js
-RUN composer clear-cache
-RUN  composer config --global --auth github-oauth.github.com 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
-RUN composer update
-RUN npm install
+# RUN composer clear-cache
+# RUN composer config --global --auth github-oauth.github.com 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
+# RUN composer install
+# RUN npm install
 
 # Configura Supervisor para el proyecto Laravel Echo Server (websockets)
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -44,4 +46,4 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 8000
 
 # Ejecuta el servidor Laravel con "php artisan serve"
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+ CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
