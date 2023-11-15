@@ -7,5 +7,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/var/www
+      - .:/var/www/html
+      - ./my-apache-config.conf:/etc/apache2/sites-available/000-default.conf
+      - ./mycert.crt:/etc/ssl/certs/mycert.crt
+      - ./mycert.key:/etc/ssl/private/mycert.key
     # command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
