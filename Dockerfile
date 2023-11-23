@@ -1,70 +1,79 @@
-# Utiliza una imagen base de Linux con PHP 7.3
-FROM couchbase/centos7-systemd:latest
-# FROM php:8.1
+# Utiliza una imagen base oficial de CentOS
+FROM centos:7
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV container docker
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
+    systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+    rm -f /lib/systemd/system/multi-user.target.wants/*;\
+    rm -f /etc/systemd/system/*.wants/*;\
+    rm -f /lib/systemd/system/local-fs.target.wants/*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+    rm -f /lib/systemd/system/basic.target.wants/*;\
+    rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-#Add ssl certs
-# Instalar Apache (httpd) y módulos necesarios
-RUN yum install -y httpd mod_ssl
+# Install anything. The service you want to start must be a SystemD service.
 
-# Habilitar el módulo rewrite (generalmente está habilitado por defecto en httpd)
-# No hay un comando equivalente directo a a2enmod en CentOS,
-# ya que los módulos suelen estar habilitados por defecto o a través de la instalación de paquetes específicos.
+# Instalar herramientas esenciales y repositorios
+RUN yum install -y epel-release yum-utils && \
+    yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y && \
+    yum-config-manager --enable remi-php81 -y && \
+    yum update -y
 
-# Configurar SSL - Reemplazar los certificados SSL predeterminados
-RUN sed -i '/SSLCertificateFile.*snakeoil\.pem/c\SSLCertificateFile \/etc\/pki\/tls\/certs\/mycert.crt' \
-    /etc/httpd/conf.d/ssl.conf && \
-    sed -i '/SSLCertificateKeyFile.*snakeoil\.key/c\SSLCertificateKeyFile /etc/pki/tls/private/mycert.key' \
-    /etc/httpd/conf.d/ssl.conf
-# En CentOS, el sitio SSL por defecto ya viene habilitado en la configuración de httpd,
-# por lo que no es necesario un comando equivalente a a2ensite.
-RUN yum install epel-release yum-utils -y
-RUN yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
-RUN yum-config-manager --enable remi-php81 -y
+# Instalar Apache, PHP, y otras dependencias
+RUN yum install -y httpd mod_ssl nginx php php-cli php-zip wget unzip git libzip-dev \
+    libpng-dev libjpeg-dev libfreetype6-dev libsqlite3-dev libxml2-dev zlib1g-dev supervisor
 
+# Configurar SSL
+COPY mycert.crt /etc/pki/tls/certs/
+COPY mycert.key /etc/pki/tls/private/
+RUN sed -i '/SSLCertificateFile/c\SSLCertificateFile /etc/pki/tls/certs/mycert.crt' /etc/httpd/conf.d/ssl.conf && \
+    sed -i '/SSLCertificateKeyFile/c\SSLCertificateKeyFile /etc/pki/tls/private/mycert.key' /etc/httpd/conf.d/ssl.conf
 
-RUN yum update && yum install -y \
-    php \
-    git \
-    unzip \
-    libzip-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libsqlite3-dev \
-    libxml2-dev \
-    zlib1g-dev \
-    supervisor
+# Configuración de Apache
+COPY my-apache-config.conf /etc/httpd/conf.d/vhost.conf
+RUN mkdir -p /var/www/html/my_website/{public_html,logs} \
+    && chown -R apache:apache /var/www/html/my_website/logs/  \
+    && chmod -R 755 /var/www/html/my_website/logs/
 
-# Instala Composer globalmente
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN mkdir /etc/apache2/
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+# RUN service apache2 restart
 
-# Instala Node.js 14.x y npm
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN yum install -y nodejs
-RUN yum install -y npm
+# Instalar Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    HASH="$(wget -q -O - https://composer.github.io/installer.sig)" && \
+    php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
+    rm composer-setup.php
 
-# Habilita las extensiones PHP necesarias
-# RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-# RUN docker-php-ext-install gd pdo pdo_sqlite zip xml
+# Instalar Node.js
+RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
+    yum install -y nodejs
 
-# Copia el proyecto Laravel en el directorio /var/www/html
-COPY /composer.* /var/www/html
-COPY /package.* /var/www/html
-WORKDIR /var/www/html
+# Verificar instalaciones
+RUN php -v && node -v
 
-# Instala las dependencias de Composer y de Node.js
-# RUN composer clear-cache
-# RUN composer config --global --auth github-oauth.github.com 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
-# RUN composer install
-# RUN npm install
+# Copiar archivos del proyecto
+# COPY . /var/www/html
+COPY /composer.* /var/www/html/my_website/public_html
+COPY /package.* /var/www/html/my_website/public_html
+WORKDIR /var/www/html/my_website/public_html
 
-# Configura Supervisor para el proyecto Laravel Echo Server (websockets)
+# Configuración de Supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Expon el puerto 8000 para el servidor Laravel
-EXPOSE 8000
+# Exponer puertos
+# EXPOSE 80 443
 
-# Ejecuta el servidor Laravel con "php artisan serve"
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Exponer el puerto 80
+EXPOSE 80
+
+# Comando para iniciar Apache cuando se inicie el contenedor
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
+# RUN cd /var/www/html/my_website/ && pwd && ls
+# CMD ["/usr/sbin/init"]
+# Comando para iniciar Supervisor
+# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
