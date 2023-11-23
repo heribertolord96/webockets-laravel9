@@ -1,0 +1,100 @@
+2023-11-15 16:33:14,670 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-11-15 16:33:14,681 INFO supervisord started with pid 1
+2023-11-15 16:33:15,684 INFO spawned: 'httpd' with pid 9
+2023-11-15 16:33:15,733 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 16:33:16,735 INFO spawned: 'httpd' with pid 10
+2023-11-15 16:33:16,774 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 16:33:18,777 INFO spawned: 'httpd' with pid 11
+2023-11-15 16:33:18,815 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 16:33:21,819 INFO spawned: 'httpd' with pid 12
+2023-11-15 16:33:21,853 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 16:33:22,855 INFO gave up: httpd entered FATAL state, too many start retries too quickly
+2023-11-15 16:43:20,773 WARN received SIGTERM indicating exit request
+2023-11-15 16:43:22,280 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-11-15 16:43:22,290 INFO supervisord started with pid 1
+2023-11-15 16:43:23,292 INFO spawned: 'httpd' with pid 9
+2023-11-15 16:43:23,346 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 16:43:24,348 INFO spawned: 'httpd' with pid 10
+2023-11-15 16:43:24,396 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 16:43:26,400 INFO spawned: 'httpd' with pid 11
+2023-11-15 16:43:26,678 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 16:43:29,683 INFO spawned: 'httpd' with pid 12
+2023-11-15 16:43:29,949 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 16:43:30,950 INFO gave up: httpd entered FATAL state, too many start retries too quickly
+2023-11-15 16:47:00,121 WARN received SIGTERM indicating exit request
+2023-11-15 16:48:51,459 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-11-15 16:48:51,474 INFO supervisord started with pid 1
+2023-11-15 17:00:30,897 WARN received SIGTERM indicating exit request
+2023-11-15 17:00:46,192 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-11-15 17:00:46,202 INFO supervisord started with pid 1
+2023-11-15 17:00:47,204 INFO spawned: 'httpd' with pid 9
+2023-11-15 17:00:47,270 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:00:48,273 INFO spawned: 'httpd' with pid 10
+2023-11-15 17:00:48,319 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:00:50,323 INFO spawned: 'httpd' with pid 11
+2023-11-15 17:00:50,426 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:00:53,432 INFO spawned: 'httpd' with pid 12
+2023-11-15 17:00:53,468 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:00:54,469 INFO gave up: httpd entered FATAL state, too many start retries too quickly
+2023-11-15 17:02:19,979 WARN received SIGTERM indicating exit request
+2023-11-15 17:02:21,110 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-11-15 17:02:21,115 INFO supervisord started with pid 1
+2023-11-15 17:02:22,116 INFO spawned: 'httpd' with pid 9
+2023-11-15 17:02:22,154 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:02:23,156 INFO spawned: 'httpd' with pid 10
+2023-11-15 17:02:23,202 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:02:25,206 INFO spawned: 'httpd' with pid 11
+2023-11-15 17:02:25,241 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:02:28,246 INFO spawned: 'httpd' with pid 12
+2023-11-15 17:02:28,282 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:02:29,283 INFO gave up: httpd entered FATAL state, too many start retries too quickly
+2023-11-15 17:03:17,642 WARN received SIGTERM indicating exit request
+2023-11-15 17:03:19,548 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-11-15 17:03:19,559 INFO supervisord started with pid 1
+2023-11-15 17:03:20,561 INFO spawned: 'httpd' with pid 9
+2023-11-15 17:03:20,605 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:03:21,609 INFO spawned: 'httpd' with pid 10
+2023-11-15 17:03:21,703 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:03:23,709 INFO spawned: 'httpd' with pid 11
+2023-11-15 17:03:23,783 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:03:26,791 INFO spawned: 'httpd' with pid 12
+2023-11-15 17:03:26,885 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:03:48,970 INFO gave up: httpd entered FATAL state, too many start retries too quickly
+2023-11-15 17:06:15,908 WARN received SIGTERM indicating exit request
+2023-11-15 17:06:25,933 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-11-15 17:06:25,942 INFO supervisord started with pid 1
+2023-11-15 17:06:26,946 INFO spawned: 'httpd' with pid 9
+2023-11-15 17:06:27,022 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:06:28,025 INFO spawned: 'httpd' with pid 10
+2023-11-15 17:06:28,103 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:06:30,106 INFO spawned: 'httpd' with pid 11
+2023-11-15 17:06:30,166 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:06:33,172 INFO spawned: 'httpd' with pid 12
+2023-11-15 17:06:42,916 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:06:43,919 INFO spawned: 'httpd' with pid 13
+2023-11-15 17:06:43,983 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:06:44,987 INFO spawned: 'httpd' with pid 14
+2023-11-15 17:06:45,048 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:06:47,051 INFO spawned: 'httpd' with pid 15
+2023-11-15 17:06:56,038 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:06:57,042 INFO spawned: 'httpd' with pid 22
+2023-11-15 17:06:57,079 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:06:58,082 INFO spawned: 'httpd' with pid 23
+2023-11-15 17:06:58,116 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:07:00,119 INFO spawned: 'httpd' with pid 25
+2023-11-15 17:07:00,155 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:07:03,160 INFO spawned: 'httpd' with pid 26
+2023-11-15 17:07:03,200 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:07:04,201 INFO gave up: httpd entered FATAL state, too many start retries too quickly
+2023-11-15 17:11:37,288 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2023-11-15 17:11:37,297 INFO supervisord started with pid 1
+2023-11-15 17:11:38,299 INFO spawned: 'httpd' with pid 9
+2023-11-15 17:11:38,342 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:11:39,345 INFO spawned: 'httpd' with pid 10
+2023-11-15 17:11:39,401 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:11:41,405 INFO spawned: 'httpd' with pid 11
+2023-11-15 17:11:41,450 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:11:44,455 INFO spawned: 'httpd' with pid 12
+2023-11-15 17:11:44,493 INFO exited: httpd (exit status 1; not expected)
+2023-11-15 17:11:45,495 INFO gave up: httpd entered FATAL state, too many start retries too quickly
+2023-11-15 17:21:55,394 WARN received SIGTERM indicating exit request
