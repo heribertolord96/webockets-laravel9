@@ -1,19 +1,17 @@
 version: '3'
 services:
-  websockets-app:
-    build:
-      # privileged: true
-      context: .
-      dockerfile: Dockerfile
-    container_name: laravel-websockets
-    ports:
-      - '80:80'
-      - '8443:443'
-      # - "6001:6001"
-    volumes:
-      - .:/var/www/html
-      - ./my-apache-config.conf:/etc/apache2/sites-available/000-default.conf
-      - ./mycert.crt:/etc/ssl/certs/mycert.crt
-      - ./mycert.key:/etc/ssl/private/mycert.key
-      - ./site_logs:/var/www/my_website/{public_html, storage/logs}
-      # command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+    websockets-app:
+        build:
+            # privileged: true
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel-websockets
+        ports:
+            - '84:80'
+        volumes:
+            - .:/var/www/html
+            - ./my-apache-config.conf:/etc/apache2/sites-available/000-default.conf
+            - ./mycert.crt:/etc/ssl/certs/mycert.crt
+            - ./mycert.key:/etc/ssl/private/mycert.key
+            - ./site_logs:/var/www/my_website/{public_html, storage/logs}
+            # command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
